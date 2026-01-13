@@ -1,0 +1,24 @@
+---
+import Navigation from "./Navigation.astro";
+import Menu from "./Menu.astro";
+import ThemeIcon from "./ThemeIcon.astro";
+import { site } from "../config.site";
+import "../styles/styles.css";
+---
+
+<header>
+  <nav>
+    <div class="nav-bar">
+      <a class="site-title" href="/">{site.title}</a>
+
+      <Navigation class="nav-desktop" />
+
+      <div class="nav-actions">
+        <ThemeIcon />
+        <Menu />
+      </div>
+    </div>
+
+    <Navigation class="nav-mobile" />
+  </nav>
+</header>

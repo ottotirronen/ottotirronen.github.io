@@ -1,16 +1,41 @@
 ---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
+const posts = await getCollection("blog");
+
+posts.sort(
+  (a, b) =>
+    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+
+// Take latest
+const latest = posts[0];
+
+// Render markdown content without layout
+const { Content } = await render(latest);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <article class="prose">
+    <h3>
+      {latest.data.title}
+    </h3>
+
+    <Content />
+    <>
+      <br />Published {latest.data.pubDate.toLocaleDateString()} by {
+        latest.data.author
+      }
+    </>
+  </article>
+  <div class="tags">
+    {
+      latest.data.tags.map((tag: string) => (
+        <p class="tag">
+          <a href={`/tags/${tag}`}>{tag}</a>
+        </p>
+      ))
+    }
+  </div>
+</BaseLayout>
