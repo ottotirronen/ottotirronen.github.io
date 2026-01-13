@@ -7,5 +7,4 @@ import preact from "@astrojs/preact";
 export default defineConfig({
   site: "https://ottotirronen.github.io",
   integrations: [preact()],
-  base: "/blog",
 });
