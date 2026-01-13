@@ -21,7 +21,7 @@ const pageTitle = "All posts";
       ))
     }
   </div>
-  <ul>
+  <ul class="blog-list">
     {
       allPosts.map((post: any) => (
         <BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
