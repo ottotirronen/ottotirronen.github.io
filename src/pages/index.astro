@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/styles.css";
+import { site } from "../site.config";
 
 const posts = await getCollection("blog");
 
@@ -11,23 +13,30 @@ posts.sort(
 
 // Take latest
 const latest = posts[0];
+if (!latest) throw new Error("No blog posts found");
 
 // Render markdown content without layout
 const { Content } = await render(latest);
 ---
 
-<BaseLayout>
-  <article class="prose">
-    <h3>
+<BaseLayout
+  pageTitle={site.title}
+  pageDescription="Exchange and development notes by Otto"
+  showPageTitle={false}
+>
+  <h1 class="sr-only">Otto Tirronen - Exchange and Development Notes</h1>
+
+  <article class="prose home-latest">
+    <h2 class="post-title">
       {latest.data.title}
-    </h3>
+    </h2>
 
     <Content />
-    <>
-      <br />Published {latest.data.pubDate.toLocaleDateString()} by {
+    <p>
+      Published {latest.data.pubDate.toLocaleDateString()} by {
         latest.data.author
       }
-    </>
+    </p>
   </article>
   <div class="tags">
     {
@@ -38,5 +47,7 @@ const { Content } = await render(latest);
       ))
     }
   </div>
-  <a href="/blog" title="Back to all posts"><br />Go to all posts</a>
+  <p>
+    <a href="/blog">Go to all posts →</a>
+  </p>
 </BaseLayout>

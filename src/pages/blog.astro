@@ -12,20 +12,26 @@ const pageTitle = "All posts";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="tags">
-    {
-      tags.map((tag) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
-      ))
-    }
+  <div>
+    <h2>Tags:</h2>
+    <div class="tags">
+      {
+        tags.map((tag) => (
+          <p class="tag">
+            <a href={`/tags/${tag}`}>{tag}</a>
+          </p>
+        ))
+      }
+    </div>
   </div>
-  <ul class="blog-list">
-    {
-      allPosts.map((post: any) => (
-        <BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
-      ))
-    }
-  </ul>
+  <div>
+    <h2>Posts:</h2>
+    <ul class="blog-list">
+      {
+        allPosts.map((post: any) => (
+          <BlogPost url={`/posts/${post.id}/`} title={post.data.title} />
+        ))
+      }
+    </ul>
+  </div>
 </BaseLayout>
