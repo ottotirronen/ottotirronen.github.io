@@ -1,4 +1,4 @@
 export const site = {
-  title: "ottotirronen",
-  description: "Exchange notes & dev logs",
+  title: "ottoalvar",
+  description: "Exchange notes & life logs",
 };
