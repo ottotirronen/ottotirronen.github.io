@@ -5,6 +5,9 @@ const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
+  <article class="prose">
+    <slot />
+  </article>
   <p>Published {frontmatter.pubDate.toLocaleDateString()}</p>
   <p>Written by {frontmatter.author}</p>
   <div class="tags">
@@ -16,8 +19,5 @@ const { frontmatter } = Astro.props;
       ))
     }
   </div>
-
-  <article class="prose">
-    <slot />
-  </article>
+  <a href="/blog" title="Back to all posts"><br />Back to all posts</a>
 </BaseLayout>
