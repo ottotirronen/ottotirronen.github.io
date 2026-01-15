@@ -7,7 +7,7 @@ import { site } from "../site.config";
 const {
   pageTitle = site.title,
   pageDescription = site.description,
-  showPageTitle = true, // NEW
+  showPageTitle = true,
 } = Astro.props;
 
 const fullTitle =
@@ -17,6 +17,12 @@ const fullTitle =
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon-otto-alvar-tirronen-blog.png"
+    />
+
     <title>{fullTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href={site.url + Astro.url.pathname} />
