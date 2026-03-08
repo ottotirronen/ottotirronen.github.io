@@ -17,9 +17,9 @@ const pageTitle = "All posts";
     <div class="tags">
       {
         tags.map((tag) => (
-          <p class="tag">
-            <a href={`/tags/${tag}`}>{tag}</a>
-          </p>
+          <a href={`/tags/${tag}`} class="tag">
+            {tag}
+          </a>
         ))
       }
     </div>

@@ -8,14 +8,14 @@ const { frontmatter } = Astro.props;
   <article class="prose">
     <slot />
   </article>
-  <p>Published {frontmatter.pubDate.toLocaleDateString()}</p>
-  <p>Written by {frontmatter.author}</p>
+  <p>-{frontmatter.author}</p>
+  <p>Posted {frontmatter.pubDate.toLocaleDateString()}</p>
   <div class="tags">
     {
       frontmatter.tags.map((tag: string) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
+        <a href={`/tags/${tag}`} class="tag">
+          {tag}
+        </a>
       ))
     }
   </div>
