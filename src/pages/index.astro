@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../site.config";
+import { timeAgo } from "../utils/date";
 
 const posts = await getCollection("blog");
 
@@ -32,7 +33,7 @@ const { Content } = await render(latest);
 
     <Content />
     <p>-{latest.data.author}</p>
-    <p>Posted {latest.data.pubDate.toLocaleDateString()}</p>
+    <p>Posted {timeAgo(latest.data.pubDate)}</p>
   </article>
   <div class="tags">
     {
