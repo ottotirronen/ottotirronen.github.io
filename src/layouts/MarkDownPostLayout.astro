@@ -11,7 +11,7 @@ const { frontmatter } = Astro.props;
   </article>
   <p>-{frontmatter.author}</p>
   <!-- <p>Posted {new Date(frontmatter.pubDate).toLocaleDateString()}</p> -->
-  <p>Posted <RelativeDate date={frontmatter.pubDate} /></p>
+  <p class="date">Posted <RelativeDate date={frontmatter.pubDate} /></p>
   <div class="tags">
     {
       frontmatter.tags.map((tag: string) => (

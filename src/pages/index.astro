@@ -29,7 +29,7 @@ const { Content } = await render(latest);
 
     <Content />
     <p>-{latest.data.author}</p>
-    <p>
+    <p class="date">
       <!-- Posted {latest.data.pubDate.toLocaleDateString()} -->
       Posted <RelativeDate date={latest.data.pubDate} />
     </p>
