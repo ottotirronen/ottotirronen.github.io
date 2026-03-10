@@ -2,7 +2,7 @@
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../site.config";
-import { timeAgo } from "../utils/date";
+import RelativeDate from "../components/RelativeDate.astro";
 
 const posts = await getCollection("blog");
 
@@ -11,11 +11,9 @@ posts.sort(
     new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime(),
 );
 
-// Take latest
 const latest = posts[0];
 if (!latest) throw new Error("No blog posts found");
 
-// Render markdown content without layout
 const { Content } = await render(latest);
 ---
 
@@ -27,14 +25,16 @@ const { Content } = await render(latest);
   <h1 class="sr-only">Otto Tirronen - Exchange and Development Notes</h1>
 
   <article class="prose home-latest">
-    <h2 class="post-title">
-      {latest.data.title}
-    </h2>
+    <h2 class="post-title">{latest.data.title}</h2>
 
     <Content />
     <p>-{latest.data.author}</p>
-    <p>Posted {timeAgo(latest.data.pubDate)}</p>
+    <p>
+      <!-- Posted {latest.data.pubDate.toLocaleDateString()} -->
+      Posted <RelativeDate date={latest.data.pubDate} />
+    </p>
   </article>
+
   <div class="tags">
     {
       latest.data.tags.map((tag: string) => (
@@ -44,6 +44,7 @@ const { Content } = await render(latest);
       ))
     }
   </div>
+
   <p>
     <a href="/blog">Go to all posts →</a>
   </p>

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import "../styles/styles.css";
-import { timeAgo } from "../utils/date";
+import RelativeDate from "../components/RelativeDate.astro";
 const { frontmatter } = Astro.props;
 ---
 
@@ -10,7 +10,8 @@ const { frontmatter } = Astro.props;
     <slot />
   </article>
   <p>-{frontmatter.author}</p>
-  <p>Posted {timeAgo(frontmatter.pubDate)}</p>
+  <!-- <p>Posted {new Date(frontmatter.pubDate).toLocaleDateString()}</p> -->
+  <p>Posted <RelativeDate date={frontmatter.pubDate} /></p>
   <div class="tags">
     {
       frontmatter.tags.map((tag: string) => (

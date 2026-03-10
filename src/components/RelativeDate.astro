@@ -1,0 +1,44 @@
+---
+interface Props {
+  date: Date;
+}
+const { date } = Astro.props;
+---
+
+<span class="relative-date" data-date={date.toISOString()}>
+  {date.toLocaleDateString()}
+</span>
+
+<script>
+  const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+
+  function getRelativeTime(pubDate: Date) {
+    const now = new Date();
+
+    const diffInMs =
+      new Date(pubDate.toDateString()).getTime() -
+      new Date(now.toDateString()).getTime();
+    const diffInDays = Math.round(diffInMs / 86400000);
+
+    const absDays = Math.abs(diffInDays);
+
+    if (absDays >= 365) {
+      return rtf.format(Math.round(diffInDays / 365), "year");
+    }
+    if (absDays >= 30) {
+      return rtf.format(Math.round(diffInDays / 30), "month");
+    }
+    if (absDays >= 7) {
+      return rtf.format(Math.round(diffInDays / 7), "week");
+    }
+
+    return rtf.format(diffInDays, "day");
+  }
+
+  document.querySelectorAll(".relative-date").forEach((el) => {
+    const dateStr = el.getAttribute("data-date");
+    if (dateStr) {
+      el.textContent = getRelativeTime(new Date(dateStr));
+    }
+  });
+</script>
