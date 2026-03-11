@@ -41,10 +41,12 @@ a {
 
 h1 {
   font-size: 1.2rem;
+  font-weight: 500;
 }
 
 h2 {
   font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .posts-list {
@@ -145,7 +147,7 @@ footer {
 }
 
 .date {
-  opacity: 95%;
+  opacity: 90%;
 }
 
 .tags {
